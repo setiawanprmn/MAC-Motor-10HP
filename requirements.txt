@@ -1,0 +1,23 @@
+# ==============================================================================
+# PIPELINE DEPENDENCIES: PCA & GAUSSIAN PROCESS REGRESSION (RUL MONITORING)
+# ==============================================================================
+
+# Database: Komunikasi Time-Series DB (Query data ESP32 & Write hasil RUL)
+influxdb-client>=1.36.0
+
+# Data Manipulation & Numeric Computing
+numpy>=1.24.0,<3.0.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Machine Learning: PCA (Health Index) & GaussianProcessRegressor (RUL Extrapolation)
+scikit-learn>=1.2.0
+
+# Persistence: Menyimpan state baseline sehat dan riwayat fitur (hi_state.joblib)
+joblib>=1.3.0
+
+# Environment Variable Loader (.env support)
+python-dotenv>=1.0.0
+
+# Container & Service Management (Docker SDK for Python)
+docker>=6.1.0

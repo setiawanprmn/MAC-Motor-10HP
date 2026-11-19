@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  influxdb:
+    image: influxdb:2.7
+    volumes:
+      - influxdb-storage:/var/lib/influxdb2:rw
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
+    restart: on-failure:10
+    ports:
+      - ${DOCKER_INFLUXDB_INIT_PORT}:8086
+
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - TZ=Asia/Jakarta
+    ports:
+      - "1880:1880"
+    # devices:
+    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    volumes:
+      - nodered_data:/data
+    restart: always
+    depends_on:
+      - influxdb
+
+  grafana:
+    image: grafana/grafana-oss:8.4.3
+    volumes:
+      - grafana-storage:/var/lib/grafana:rw
+    depends_on:
+      - influxdb
+    ports:
+      - ${GRAFANA_PORT}:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+
+volumes:
+  nodered_data:
+  grafana-storage:
+  influxdb-storage:
+  

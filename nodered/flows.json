@@ -1,0 +1,114 @@
+[
+    {
+        "id": "7116fb3582ae3445",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "297a14569b5c8b92",
+        "type": "http in",
+        "z": "7116fb3582ae3445",
+        "name": "Reciever esp32",
+        "url": "/kirim-data",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 380,
+        "wires": [
+            [
+                "7a5a6513bd42d454",
+                "cb9680b2309c0b0b"
+            ]
+        ]
+    },
+    {
+        "id": "7a5a6513bd42d454",
+        "type": "http response",
+        "z": "7116fb3582ae3445",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 270,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "cb9680b2309c0b0b",
+        "type": "json",
+        "z": "7116fb3582ae3445",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "6a69f16a1235e7b4",
+                "5a4c938dbc8714f0"
+            ]
+        ]
+    },
+    {
+        "id": "6a69f16a1235e7b4",
+        "type": "debug",
+        "z": "7116fb3582ae3445",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5a4c938dbc8714f0",
+        "type": "influxdb out",
+        "z": "7116fb3582ae3445",
+        "influxdb": "30da8b8fd1b5a80f",
+        "name": "to-influxdb",
+        "measurement": "ac_sensor_features",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "inforlab",
+        "bucket": "1RUL-AC-MOTOR",
+        "x": 450,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "30da8b8fd1b5a80f",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "influx service",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.1.8:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "604452a35f52d010",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]

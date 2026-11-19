@@ -1,0 +1,4 @@
+{
+  "diagram": "[ SENSORS ]\n  ├── MPU6050 (Vibration X,Y,Z)\n  ├── ADS1115 (Power/Current)\n  ├── DS18B20 (Temperature)\n  └── Hall Effect (RPM)\n        │\n        ▼ (GPIO / I2C / OneWire)\n[ ESP32 Microcontroller ]\n        │\n        ▼ (Wi-Fi / HTTP POST `/kirim-data`)\n[ Node-RED Engine ]\n        │\n        ▼ (Docker Internal Network)\n[ InfluxDB (Bucket: 1RUL-DC-MOTOR) ] <──┐\n        │                                │ Write Back RUL\n        ▼ Query Time-Series Data         │ (`dc_sensor_prediction`)\n[ Python ML Engine (LSTM RUL Inference) ]┴──┐\n                                            │\n                                            ▼ Query Both Measurements\n                                  [ Grafana Dashboard ]"
+}
+
